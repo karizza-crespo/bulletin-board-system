@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}Title{% endblock %}</title>
+        <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/style.css" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    </head>
+    <body name="top">
+        <div id="container">
+            {% block header %}
+                <header>
+                    <div class="project-name">
+                        <h1><a href="/bulletinboard/" class="header-link">Bulletin Board System</a></h1>
+                    </div>
+                    <div class='user-details-container'>
+                        {% for profile in user.userprofile_set.all %}
+                            <img class="user-avatar" src="{{MEDIA_URL}}{{profile.avatar}}" />
+                        {% endfor %}
+                        <div class="about-me-details">
+                            {% for profile in user.userprofile_set.all %}
+                                <p>{{profile.about_me}}</p>
+                                <a class="thread-post-number">Posts: </a>{{profile.get_post_count}}
+                            {% endfor %}
+                        </div>
+                        <div class="user-details">
+                            <ul class="user-details-list">
+                                <li>
+                                    <span class="user-greeting">Hello, 
+                                        <a class="user-name">{{user}}</a>!
+                                        <div class="about-me-post-count">
+                                            {% for profile in user.userprofile_set.all %}
+                                                <p>{{profile.about_me}}</p>
+                                                <a class="thread-post-number">Posts: </a>{{profile.get_post_count}}
+                                            {% endfor %}
+                                        </div>
+                                    </span>
+                                </li>
+                                <li><a href="/bulletinboard/userprofile/" class="header-link">Profile</a></li>
+                                <li><a href="/accounts/logout/" class="header-link">Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </header>
+            {% endblock %}
+            {% block body %}
+            {% endblock %}
+            {% block footer %}
+                <footer>
+                    &copy; 2013 icannhas, inc.
+                </footer>
+            {% endblock %}
+        </div>
+        <a href="#top" title="Back to top">
+            <img src="{{STATIC_URL}}images/arrow.png" class="back-to-top-button" />
+        </a>
+    </body>
+</html>

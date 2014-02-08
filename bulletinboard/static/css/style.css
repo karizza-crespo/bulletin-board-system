@@ -1,0 +1,1177 @@
+@font-face {
+    font-family: QuickSand;
+    src: url('QuickSand.otf');
+}
+
+body {
+    background-color: #E8E8E8;
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    font-family: QuickSand;
+}
+
+#container {
+    background-color: #FFF;
+    border: 1px solid #000;
+    box-shadow: 0px 3px 3px 4px #888;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 958px;
+}
+
+/* Header */
+
+header {
+    background-color: #101010;
+    color: #FFFFFF;
+    display: block;
+    height: 120px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.project-name {
+    display: table;
+    float: left;
+    line-height: 120px;
+}
+
+    .project-name > h1 {
+        display: table-cell;
+        margin: 0;
+        vertical-align: middle; 
+    }
+
+.login-form {
+    display: table;
+    float: right;
+    line-height: 35px;
+    padding-top: 10px;
+    width: 175px;
+}
+
+    .login-form input {
+        display: table-cell;
+        height: 25px;
+        vertical-align: middle;
+    }
+
+.register-link {
+    color: white;
+    float: right;
+    text-decoration: none;
+}
+
+    .register-link:hover {
+        color: white;
+        text-decoration: underline;
+    }
+
+.user-details-container
+{
+    float: right;
+    position: relative;
+}
+
+.user-details {
+    display: table;
+    float: left;
+    line-height: 20px;
+    margin-left: 20px;
+    padding-top: 15px;
+}
+
+.user-avatar {
+    border-radius: 5px;
+    float: left;
+    margin-top: 20px;
+    height: 80px;
+    width: 80px;
+}
+
+.user-details-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.header-link {
+    color: #FFF;
+    text-decoration: none;
+}
+
+    .header-link:hover {
+        text-decoration: underline;
+    }
+
+.user-login {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Content */
+
+article {
+    display: block;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.next-line {
+    clear: both;
+    margin-top: 20px;
+}
+
+.list-of-boards {
+    display: block;
+    width: 100%;
+}
+
+.board-display {
+    display: block;
+    float: left;
+    height: 149px;
+    position: relative;
+    text-align: center;
+    width: 149px;
+}
+
+    .board-name:hover + .board-details {
+        background-color: #FFF;
+        border: 1px solid #888;
+        box-shadow: 2px 2px 2px #888;
+        display: block;
+        left: 40%;
+        line-height: 20px;
+        margin-top: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+        position: absolute;
+        text-align: left;
+        width: 280px;
+        z-index: 100;
+    }
+
+.user-avatar + .about-me-details {
+    display: none;
+}
+
+    .user-avatar:hover + .about-me-details {
+        background-color: #FFF;
+        border: 1px solid #888;
+        box-shadow: 2px 2px 2px #888;
+        color: black;
+        display: block;
+        left: 20%;
+        padding-bottom: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        position: absolute;
+        top: 100%;
+        width: 250px;
+        z-index: 100;
+    }
+
+.thread-post-number {
+    font-weight: bold;
+}
+
+.board-details {
+    display: none;
+}
+
+.board-details-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.board-name {
+    color: #101010;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+    .board-name:hover {
+        color: #000;
+        text-decoration: underline;
+    }
+
+.reorder-board-button {
+    height: 10px;
+    width: 10px;
+}
+
+.board-icon {
+    height: 80px;
+    width: 80px;
+    vertical-align: middle;
+}
+
+.thread-type-image {
+    height: 20px;
+    width: 20px;
+}
+
+.header-image-button {
+    height: 35px;
+    vertical-align: middle;
+    width: 35px;
+}
+
+.post-avatar {
+    border-radius: 5px;
+    height: 70px;
+    width: 70px;
+}
+
+.topic-form {
+    clear: left;
+    display: block;
+    float: left;
+    padding-left: 30px;
+    padding-right: 37px;
+    width: 410px;
+}
+
+    .topic-form input {
+        font-size: 16px;
+        height: 25px;
+    }
+
+.board-form {
+    display: block;
+    float: left;
+    padding-left: 37px;
+    padding-right: 30px;
+    width: 410px;
+}
+
+    .board-form select, 
+    .board-form input[type='text'], 
+    .board-form input[type='submit'] {
+        font-size: 17px;
+        height: 25px;
+    }
+
+section {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.empty-board {
+    height: 350px;
+    line-height: 350px;
+    text-align: center;
+}
+
+.empty-thread {
+    height: 200px;
+    line-height: 200px;
+    text-align: center;
+}
+
+.banned,
+.locked-thread {
+    height: 160px;
+    margin-top: 50px;
+    text-align: center;
+}
+
+/* Footer */
+
+footer {
+    background-color: #404040;
+    clear: both;
+    color: #FFF;
+    display: block;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+/* Board Index and Thread Index */
+
+.board-header {
+    background-color: #FFF;
+    color: #000;
+    font-size: 20px;
+    height: 40px;
+    padding-top: 10px;
+}
+
+.header-board-icon {
+    height: 30px;
+    vertical-align: middle;
+    width: 30px;
+}
+
+.link {
+    color: #000;
+}
+    .link:hover {
+        text-decoration: underline;
+    }
+
+.delete-board-button {
+    float: right;
+    height: 35px;
+    vertical-align: middle;
+    width: 35px;
+}
+
+.thread-list {
+    border: 1px solid #B0B0B0;
+    border-collapse: collapse;
+    text-align: center;
+    width: 100%;
+}
+    .thread-list th {
+        background: #CCC;
+        border: 1px solid #000;
+        font-size: 20px;
+        padding: 5px;
+    }
+
+    .thread-list tr:nth-child(even) {
+        background: #E8E8E8;
+    }
+    
+    .thread-list tr:nth-child(odd) {
+        background: #FFF;
+    }
+
+    .thread-list td {
+        border-right: 1px solid #B0B0B0;
+        padding: 10px;
+    }
+
+    .thread-name {
+        text-align: left;
+    }
+
+.pagination {
+    clear: right;
+    float: right;
+    padding: 0;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+    .pagination select {
+        font-size: 15px;
+    }
+
+.new-thread-form {
+    clear: both;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+    .new-thread-form input {
+        font-size: 17px;
+        height: 25px;
+    }
+
+.thread-header {
+    background-color: #FFF;
+    color: #000;
+    font-size: 2em;
+    height: 50px;
+    line-height: 50px;
+    padding-top: 10px;
+}
+
+.thread-controls {
+    float: right;
+}
+
+.post-list {
+    width: 100%;
+}
+
+    .post-list tr:nth-child(even) {
+        background: #E8E8E8;
+    }
+    
+    .post-list tr:nth-child(odd) {
+        background: #CCC;
+    }
+
+    .post-list td {
+        border-radius: 5px;
+        padding: 10px;
+    }
+
+.post-details {
+    text-align: center;
+    width: 15%;
+}
+
+.new-post-form {
+    clear: both;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+    .new-post-form input {
+        font-size: 17px;
+        height: 25px;
+    }
+
+.editpost {
+    float: right;
+}
+
+.edit-post-form {
+    height: 260px;
+    padding-top: 20px;
+}
+
+.edit-post-form input {
+    font-size: 17px;
+}
+
+.new-user {
+    height: 330px;
+    padding: 50px;   
+}
+
+.new-user h1 {
+    text-align: center;
+}
+
+.new-user table {
+    margin: auto;
+}
+
+.new-user input {
+    font-size: 18px;
+    height: 25px;
+}
+
+.login-link {
+    display: table;
+    float: right;
+    line-height: 120px;
+    color: white;
+    font-size: 20px;
+}
+
+    .login-link a {
+        color: white;
+    }
+
+    .login-link a:hover {
+        text-decoration: underline;
+    }
+
+.error-message {
+    text-align: center;
+    color: #F00;
+}
+
+.back-to-top-button {
+    height: 50px;
+    left: 1285px;
+    position: fixed;
+    top: 590px;
+    width: 50px;
+}
+
+    .back-to-top-button:hover {
+        opacity: 0.6
+    }
+
+/* User Profile */
+.profile-post-details {
+    width: 30%;
+}
+
+.user-profile-header {
+    background-color: #FFF;
+    color: #000;
+    font-size: 25px;
+    height: 60px;
+    padding: 0;
+    padding-bottom: 15px;
+    margin-top: 10px;
+}
+
+.user-profile-avatar {
+    border-radius: 5px;
+    height: 60px;
+    vertical-align: middle;
+    width: 60px;
+}
+
+.user-profile-button {
+    float: right;
+    height: 35px;
+    width: 35px;
+    padding-top: 13px;
+}
+
+.user-profile-details {
+    border: 1px solid #B0B0B0;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+    .user-profile-details tr:nth-child(even) {
+        background: #E8E8E8;
+    }
+    
+    .user-profile-details tr:nth-child(odd) {
+        background: #FFF;
+    }
+
+    .user-profile-details td {
+        border-right: 1px solid #B0B0B0;
+        padding: 10px;
+    }
+
+    .user-profile-details td:nth-child(odd) {
+        width: 20%;
+    }
+
+.user-profile-form {
+    padding-bottom: 10px;
+}
+
+    .user-profile-form input,
+    .user-profile-form select {
+        font-size: 17px;
+        height: 25px;
+    }
+
+    .user-profile-form table {
+        text-align: left;
+    }
+
+.about-me-post-count {
+    display: none;
+}
+
+.user-name:hover + .about-me-post-count {
+    background-color: #FFF;
+    border: 1px solid #888;
+    box-shadow: 2px 2px 2px #888;
+    color: #000;
+    display: block;
+    line-height: 13px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    position: absolute;
+    width: 250px;
+    z-index: 100;
+}
+
+
+@media only screen and (max-width: 320px), only screen and (max-device-width: 320px) {
+
+    #container {
+        box-shadow: none;
+        width: 318px;
+        margin: 0;
+        padding: 0;
+    }
+
+    header {
+        padding: 0;
+    }
+
+    .user-details-container {
+        text-align: center;
+        width: 100%;
+    }
+
+    .project-name {
+        line-height: 20px;
+        padding-top: 20px;
+        text-align: center;
+        width: 100%;
+    }
+
+        .project-name > h1 {
+            font-size: 23px;
+        }
+
+    .user-avatar {
+        height: 40px;
+        width: 40px;
+        padding-left: 20px;
+    }
+
+    .user-details {
+        margin-left: 10px;        
+        font-size: 15px;
+        width: 225px;
+        word-spacing: 7px;
+    }
+
+    .user-greeting {
+        word-spacing: normal;
+    }
+
+    .user-details-list {
+        width: 100%;
+    }
+
+        .user-details-list li {
+            display: inline;
+        }
+
+    .login-form {
+        padding-right: 20px;
+        width: 278px;
+    }
+
+        .login-form input[type="text"],
+        .login-form input[type="password"] {
+            float: left;
+            margin-right: 4.5px;
+            width: 131px;
+        }
+
+    .board-icon {
+        float: left;
+        height: 40px;
+        width: 40px;
+    }
+
+    .board-display {
+        height: 50px;
+        width: 260px;
+    }
+
+    .board-name-details {
+        float: left;
+        margin-left: 15px;
+        padding-top: 12px;
+        text-align: left;
+        width: 200px;
+    }
+
+    .reorder-board-button {
+        display: none;
+    }
+
+    .next-line {
+        font-size: 18px;
+    }
+
+    .topic-form {
+        font-size: 13px;
+        width: 250px;
+    }
+
+        .topic-form input {
+            font-size: 15px;
+            height: 18px;
+        }
+
+    .board-form {
+        font-size: 13px;
+        padding-left: 30px;
+        padding-right: 30px;
+        width: 250px;
+    }
+
+        .board-form select, 
+        .board-form input[type='text'],
+        .board-form input[type='submit'] {
+            font-size: 15px;
+            height: 18px;
+        }
+
+        .board-form input[type='file'] {
+            width: 260px;
+        }
+
+        .board-form textarea {
+            height: 100px;
+        }
+
+    .thread-list {
+        font-size: 12px;
+        width: 260px;
+    }
+    
+        .thread-list .link {
+            font-size: 12px;
+        }
+
+        .thread-list th {
+            font-size: 15px;
+            padding: 5px;
+        }
+
+    .thread-type-image {
+        height: 15px;
+        width: 15px;
+    }
+
+    .empty-thread {
+        height: 100px;
+        line-height: 100px;
+    }
+
+    .banned {
+        height: 160px;
+    }
+
+    textarea {
+        height: 120px;
+        width: 260px;
+    }
+
+    footer {
+        font-size: 12px;
+    }
+
+    .pagination {
+        font-size: 12px;
+    }
+
+        .pagination select,
+        .pagination input {
+            font-size: 10px;
+        }
+
+    .link,
+    .no-list,
+    .board-header-name {
+        font-size: 16px;
+    }
+
+    .delete-board-button {
+        height: 20px;
+        width: 20px;
+    }
+
+    .header-board-icon {
+        height: 25px;
+        width: 25px;
+    }
+
+    .new-form-header {
+        font-size: 16px;
+    }
+
+    .new-thread-form {
+        font-size: 14px;
+    } 
+
+    .new-thread-form input {
+        font-size: 14px;
+        height: 18px;
+    }
+
+    .new-thread-form textarea {
+        height: 90px;
+        width: 170px;
+    }
+
+    .login-link {
+        float: right;
+        line-height: 50px;
+        padding-right: 20px;
+        padding-top: 20px;
+    }
+
+    .new-user {
+        font-size: 13px;
+        padding: 0;
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: 20px;
+    }
+
+    .new-user input[type='text'],
+    .new-user input[type='password'] {
+        width: 180px;
+    }
+
+    .new-user input[type='submit'] {
+        font-size: 13px;
+    }
+
+    .board-header {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .user-profile-avatar {
+        height: 40px;
+        width: 40px;
+    }
+
+    .user-profile-header {
+        font-size: 18px;
+        padding: 0;
+    }
+
+    .user-profile-details {
+        font-size: 12px;
+    }
+
+    .label-header {
+        font-size: 17px;
+    }
+
+    .post-list,
+    .post-list a {
+        font-size: 12px;
+    }
+
+    .user-profile-button {
+        height: 20px;
+        width: 20px;
+    }
+
+    .user-profile-form {
+        font-size: 12px;
+    }
+
+        .user-profile-form input,
+        .user-profile-form select {
+            font-size: 11px;
+            height: 15px;
+        }
+
+        .user-profile-form textarea {
+            font-size: 11px;
+            height: 80px;
+            width: 180px;
+        }
+
+        .user-profile-form input[type='file'] {
+            width: 180px;
+        }
+
+    .thread-header {
+        font-size: 16px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .header-image-button {
+        height: 20px;
+        width: 20px;
+    }
+
+    .post-avatar {
+        height: 35px;
+        width: 35px;
+    }
+
+    .new-post-form, 
+    .new-post-form input {
+        font-size: 13px;
+    }
+
+    .new-post-form textarea {
+        height: 80px;
+        width: 150px;
+    }
+
+    .editpost {
+        padding: 0;
+    }
+
+    .edit-post-form, 
+    .edit-post-form input {
+        font-size: 13px;
+    }
+
+    .edit-post-form textarea {
+        height: 130px;
+        width: 190px;
+    }
+
+    .board-name:hover + .board-details {
+        font-size: 12px;
+        left: 10%;
+        text-align: left;
+        width: 180px;
+    }
+
+    .user-avatar:hover + .about-me-details {
+        font-size: 12px;
+        left: 10%;
+        text-align: left;
+        width: 180px;
+    }
+
+    .user-name:hover + .about-me-post-count {
+        font-size: 12px;
+        text-align: left;
+        width: 180px;
+    }
+}
+
+@media only screen and (min-width: 321px) and (max-width: 640px), only screen and (min-device-width: 321px) and (max-device-width: 640px) {
+
+    #container {
+        border: 1px solid #000;
+        box-shadow: none;
+        width: 638px;
+        margin: 0;
+        padding: 0;
+    }
+
+    .board-display {
+        display: block;
+        float: left;
+        height: 144px;
+        position: relative;
+        text-align: center;
+        width: 144px;
+    }
+
+    .user-details-container {
+        float: left;
+        text-align: center;
+        width: 100%;
+    }
+
+    .project-name {
+        line-height: 20px;
+        padding-top: 20px;
+        width: 100%;
+    }
+
+        .project-name > h1 {
+            font-size: 27px;
+        }
+
+    .user-avatar {
+        height: 40px;
+        width: 40px;
+    }
+
+    .user-details {
+        margin-left: 10px;
+        padding-right: 20px;
+        font-size: 15px;
+        width: 225px;
+        word-spacing: 7px;
+    }
+
+    .user-greeting {
+        word-spacing: normal;
+    }
+
+    .user-details-list {
+        width: 100%;
+    }
+
+        .user-details-list li {
+            display: inline;
+        }
+
+    .login-form {
+        display: block;
+        float: left;
+        padding-top: 20px;
+        width: 100%;
+    }
+
+    .register-link {
+        padding-top: 20px;
+    }
+
+    .board-header {
+        font-size: 17px;
+    }
+
+    .thread-list {
+        font-size: 14px;
+    }
+    
+        .thread-list .link {
+            font-size: 14px;
+        }
+
+        .thread-list th {
+            font-size: 16px;
+        }
+
+    .thread-type-image {
+        height: 15px;
+        width: 15px;
+    }
+
+    .delete-board-button {
+        height: 25px;
+        width: 25px;
+    }
+
+    .pagination {
+        font-size: 15px;
+    }
+
+    .pagination input,
+    .pagination select {
+        font-size: 12px;
+    }
+
+    .new-form-header {
+        font-size: 18px;
+    }
+
+    .new-thread-form {
+        font-size: 14px;
+    }
+
+        .new-thread-form input {
+            font-size: 14px;
+            height: 22px;
+        }
+
+        .new-thread-form input[type='text'] {
+            width: 250px;
+        }
+
+        .new-thread-form textarea {
+            width: 250px;
+        }
+
+    .topic-form {
+        width: 570px;
+    }
+
+        .topic-form input {
+            font-size: 15px;
+            height: 20px;
+        }
+
+    .board-form {
+        width: 570px;
+    }
+
+        .board-form select, 
+        .board-form input[type='text'], 
+        .board-form input[type='submit'] {
+            font-size: 15px;
+            height: 20px;
+        }
+
+        .board-form textarea {
+            vertical-align: middle;
+        }
+
+    .thread-header {
+        font-size: 20px;
+    }
+
+    .header-image-button {
+        height: 25px;
+        width: 25px;
+    }
+
+    .post-avatar {
+        height: 45px;
+        width: 45px;
+    }
+
+    .post-list {
+        font-size: 14px;
+    }
+
+        .post-list td:nth-child(odd) {
+            width: 20%;
+        }
+
+    .no-list {
+        font-size: 20px;
+    }
+
+    .user-profile-avatar {
+        height: 50px;
+        width: 50px;
+    }
+
+    .user-profile-header {
+        font-size: 20px;
+    }
+
+    .user-profile-button {
+        height: 30px;
+        width: 30px;
+    }
+
+    .user-profile-details {
+        font-size: 14px;
+    }
+
+    .label-header {
+        font-size: 19px;
+    }
+
+    .user-profile-form {
+        font-size: 14px;
+    }
+
+        .user-profile-form input,
+        .user-profile-form input[type='file'],
+        .user-profile-form select {
+            font-size: 14px;
+            height: 20px;
+        }
+
+    .edit-post-form {
+        font-size: 14px;
+    }
+
+    .edit-post-form input {
+        font-size: 14px;
+    }
+
+    footer {
+        font-size: 14px;
+    }
+
+    .board-name:hover + .board-details {
+        font-size: 14px;
+        left: 0;
+        width: 150px;
+    }
+
+    .user-avatar:hover + .about-me-details {
+        font-size: 14px;
+        left: 0;
+        text-align: left;
+        top: 100%;
+        width: 250px;
+    }
+
+    .user-name:hover + .about-me-post-count {
+        text-align: left;
+        left: 20%;
+        width: 250px;
+    }
+
+    .no-list {
+        height: 200px;
+        font-size: 16px;
+    }
+}
+
+@media only screen and (max-width: 960px), only screen and (max-device-width: 960px) {
+    
+    #container {
+        margin: 0;
+        padding: 0;
+    }
+}

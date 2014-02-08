@@ -1,0 +1,102 @@
+{% extends "bulletinboard/base.html" %}
+{% block title %} Board Index - {{board.name}}{% endblock %}
+{% block body %}
+    <header class="board-header">
+        <a href="/bulletinboard/" class="link"> Home </a>
+        >
+        <a class="board-header-name">{{board.name}}</a>
+        &nbsp;<img src="{{MEDIA_URL}}{{board.icon}}" alt="Board Icon" class="header-board-icon" />
+        {% if perms.bulletinboard.delete_board and profile.is_banned == False %}
+            <a href="{% url 'bulletinboard:delete_board' board.id %}">
+                <img src="{{STATIC_URL}}images/trash.png" alt="Delete Board" class="delete-board-button" title="Delete Board" />
+            </a>
+        {% endif %}
+    </header>   
+    {% if threads %}
+    <section>
+            <br />
+            <table class="thread-list">
+            <thead>
+                <tr>
+                    <th class='thread-name'>Thread</th>
+                    <th>Author</th>
+                    <th>Posts</th>
+                    <th>Last Reply</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% load bulletinboard_filters %}
+            {% for thread, post in threads|zip:posts %}
+                <tr>
+                    <td class='thread-name'>
+                        {% if thread.thread_type == '1' %}
+                            <img src="{{STATIC_URL}}images/pin.png" class="thread-type-image" />
+                        {% endif %}
+                        {% if thread.is_locked %}
+                            <img src="{{STATIC_URL}}images/lock.png" class="thread-type-image" />
+                        {% endif %}
+                        <a class="link" href="{% url 'bulletinboard:thread' board.id thread.id %}">
+                            {{thread.name}}
+                        </a>
+                    </td>
+                    <td>
+                        <a class="link" href="{% url 'bulletinboard:other_profile' thread.user.id %}">
+                            {{thread.user.user}}
+                        </a>
+                    </td>
+                    <td>{{thread.get_post_number}}</td>
+                    <td>
+                        <a class="link" href="{% url 'bulletinboard:other_profile' post.user.id %}">
+                            {{post.user.user.username}}
+                        </a>
+                        on {{thread.latest_post}}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <section class="pagination">
+            <form method="post" action="">
+                {% csrf_token %}
+                Go to page: 
+                <select name="pagenumber">
+                {% for page in threads.paginator.num_pages|get_range %}
+                    <option value="{{page}}">{{page}}</option>
+                {% endfor %}
+                <select>
+                <input type="submit" value=">>" name="gotopage" />
+            </form>
+        </section>
+    </section>
+    {% else %}
+        <section class="empty-thread">
+            <h2 class="no-list">No threads for this board.</h2>
+        </section>
+    {% endif %}
+    
+    <!-- check if the user is banned, if not, display the forms for creating threads and posts -->
+    {% if profile.is_banned == False %}
+        <section class='new-thread-form'>
+            <hr />
+            <h2 class="new-form-header">Add New Thread and Post:</h2>
+            <hr />
+            <br />
+            <form action="" method="post">
+                {% csrf_token %}
+                <table>
+                {{thread_form.as_table}}
+                {{post_form.as_table}}
+                </table>
+                <input type="submit" value="Add Thread and Post" name="addthreadpost" />
+            </form>
+        </section>
+    {% else %}
+        <section class="banned">
+            <h2 class="no-list">
+                <img src="{{STATIC_URL}}images/banned.png"  class="header-image-button" alt="Banned" />
+                You are banned from creating threads and adding posts.
+            </h2>
+        </section>
+    {% endif %}
+    
+{% endblock %}

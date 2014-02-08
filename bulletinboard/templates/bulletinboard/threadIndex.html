@@ -1,0 +1,121 @@
+{% extends "bulletinboard/base.html" %}
+{% block title %} Thread Index - {{thread.name}}{% endblock %}
+{% block body %}
+    <header class="board-header">
+        <a href="/bulletinboard/" class="link"> Home </a>
+        >
+        <a href="{% url 'bulletinboard:board' thread.board.id %}" class="link">{{thread.board.name}}</a>
+        &nbsp;<img src="{{MEDIA_URL}}{{thread.board.icon}}" alt="Board Icon" class="header-board-icon" />
+    </header>
+    <!-- check if the user type is moderator or administrator, if yes, display buttons for locking/unlocking and marking sticky or not -->
+    <header class="thread-header">
+    {{thread.name}}
+    <div class="thread-controls">
+        {% if perms.bulletinboard.lock_thread %}
+            {% if profile.is_banned == False %}
+                <a href="{% url 'bulletinboard:sticky_not_sticky' thread.board.id thread.id %}">
+                    {% if thread.thread_type == '1' %}
+                        <img src="{{STATIC_URL}}images/pin.png" alt="Sticky Thread" class="header-image-button" title="Mark as Not Sticky" />
+                    {% else %}
+                        <img src="{{STATIC_URL}}images/unpin.png" alt="Not Sticky Thread" class="header-image-button" title="Mark as Sticky" />
+                    {% endif %}
+                </a>
+                <a href="{% url 'bulletinboard:lock_unlock_thread' thread.board.id thread.id %}">
+                    {% if thread.is_locked == False %}
+                        <img src="{{STATIC_URL}}images/unlock.png" alt="Unlocked Thread" class="header-image-button" title="Click to Lock" />
+                    {% else %}
+                        <img src="{{STATIC_URL}}images/lock.png" alt="Locked Thread" class="header-image-button" title="Click to Unlock" />
+                    {% endif %}
+                </a>
+            {% endif %}
+            {% if profile.user_type == 3 or thread.user.user.username == user.username and profile.is_banned == False %}
+                <a href="{% url 'bulletinboard:delete_thread' thread.board.id thread.id %}">
+                    <img src="{{STATIC_URL}}images/trash.png" alt="Delete Thread" class="header-image-button" title="Delete Thread" />
+                </a>
+            {% endif %}
+        {% endif %}
+    </div>
+    </header>   
+    {% if posts %}
+    <section>
+        <table class="post-list">
+            <tbody>
+            {% for post in posts %}
+            <tr>
+                <td class="post-details">
+                    <img src="{{MEDIA_URL}}{{post.user.avatar}}" class="post-avatar" alt="Avatar" />
+                    <br />
+                    <a class="link" href="{% url 'bulletinboard:other_profile' post.user.id %}">
+                        {{post.user.user.username}}
+                    </a>
+                    <br />
+                    {{post.date_posted}}
+                </td>
+                <td>
+                    {{post.message|safe}}
+                    <section class="editpost">
+                        {% if profile.user.username == post.user.user.username and profile.is_banned == False and post.thread.is_locked == False %}
+                            <a class="link" href="{% url 'bulletinboard:edit_post' thread.board.id thread.id post.id %}">
+                                Edit Post
+                            </a>    
+                        {% endif %}
+                    </section>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <section class="pagination">
+            <form method="post" action="">
+                {% csrf_token %}
+                Go to page: 
+                <select name="pagenumber">
+                {% load bulletinboard_filters %}
+                {% for page in posts.paginator.num_pages|get_range %}
+                    <option value="{{page}}">{{page}}</option>
+                {% endfor %}
+                <select>
+                <input type="submit" value=">>" name="gotopage" />
+            </form>
+        </section>
+    </section>
+    {% else %}
+    <section class="empty-thread">
+        <h2 class="no-list">No posts on this thread.</h2>
+    </section>
+    {% endif %}
+    
+    
+    <!-- if the thread is locked, inform the user (the post form is not shown) -->
+    {% if thread.is_locked %}
+    <section class="locked-thread">
+        <h2 class="no-list">
+            <img src="{{STATIC_URL}}images/lock.png" class="header-image-button" alt="Locked Thread" />
+            This thread is locked.
+        </h2>
+    </section>
+    {% else %}
+        <!-- if the thread is unlocked and the user is not banned, display the form -->
+        {% if not profile.is_banned %}
+        <section class="new-post-form">
+            <hr />
+            <h1 class="new-form-header">Add Post:</h1>
+            <hr />
+            <form action="" method="post">
+                {% csrf_token %}
+                <table>{{post_form.as_table}}</table>
+                <input type="submit" value="Add Post" name="addpost" />
+            </form>
+        </section>
+        <!-- if the user is banned, form is not shown -->
+        {% else %}
+        <section class="banned">
+            <h2 class="no-list">
+                <img src="{{STATIC_URL}}images/banned.png" class="header-image-button" alt="Banned" />
+                You are banned from adding posts.
+            </h2>
+        </section>
+        {% endif %}
+    {% endif %}
+    
+{% endblock %}

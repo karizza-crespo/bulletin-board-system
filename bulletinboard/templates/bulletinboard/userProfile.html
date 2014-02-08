@@ -1,0 +1,135 @@
+    {% extends "bulletinboard/base.html" %}
+{% block title %} User Profile {% endblock %}
+{% block body %}
+    <section class="user-profile">
+        <header class="user-profile-header">
+            <img src="{{MEDIA_URL}}{{profile.avatar}}" class="user-profile-avatar"/>
+            About
+            {% for user in user.userprofile_set.all %}
+                <!-- check if the user has permission -->
+                {% if perms.bulletinboard.ban_user %}
+                    <!-- check if the user is not banned -->
+                    {% if user.is_banned == False %}
+                        <!-- check if the user logged in and the owner of the profile is not the same  and the owner of the profile is not an administrator -->
+                        {% if profile.user.username != user.user.username and profile.user_type != 3 %}
+                            <!-- display links for banning/permitting a user -->
+                            <a href="{% url 'bulletinboard:ban_user' profile.id %}">
+                                {% if profile.is_banned == False %}
+                                    <img src="{{STATIC_URL}}images/banned.png" class="user-profile-button" title="Ban User" />
+                                {% else %}
+                                    <img src="{{STATIC_URL}}images/check.png" class="user-profile-button" title="Permit User" />
+                                {% endif %}
+                            </a>
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            {% if user.username == profile.user.username %}
+                <a href="{% url 'bulletinboard:edit_user_profile' %}">
+                    <img src="{{STATIC_URL}}images/edit-profile.png" class="user-profile-button" title="Edit Profile" />
+                </a>
+            {% endif %}
+        </header>
+        <br />
+        <table class="user-profile-details">
+            <tbody>
+                <tr>
+                    <td>Username: </td>
+                    <td>{{profile.user.username}}</td>
+                </tr>
+                <tr>
+                    <td>Gender: </td>
+                    <td>{{profile.get_gender}}</td>
+                </tr>
+                <tr>
+                    <td>Birthdate:</td>
+                    <td>{{profile.birthdate}}</td>
+                </tr>
+                <tr>
+                    <td>About Me: </td>
+                    <td>{{profile.about_me}}</td>
+                </tr>
+                <tr>
+                    <td>Interests: </td>
+                    <td>{{profile.interests}}</td>
+                </tr>
+                <tr>
+                    <td>Hometown:</td>
+                    <td>{{profile.hometown}}</td>
+                </tr>
+                <tr>
+                    <td>Present Location:</td>
+                    <td>{{profile.present_location}}</td>
+                </tr>
+                <tr>
+                    <td>User Type: </td>
+                    <td>{{profile.get_type}}</td>
+                </tr>
+                <tr>
+                    <td>Skype: </td>
+                    <td>{{profile.skype}}</td>
+                </tr>
+                <tr>
+                    <td>Yahoo! Messenger: </td>
+                    <td>{{profile.ym}}</td>
+                </tr>
+                <tr>
+                    <td>Website: </td>
+                    <td>{{profile.website}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    <br />
+    <section class="user-profile">
+    {% if posts %}
+        <h2 class="label-header">POSTS:</h2>
+        <table class="post-list">
+            <tbody>
+            {% for post in posts %}
+                <tr>
+                    <td class="profile-post-details ">
+                        <img src="{{MEDIA_URL}}{{post.thread.board.icon}}" class="header-board-icon"/>
+                        <a href="{% url 'bulletinboard:board' post.thread.board.id %}" class="link">
+                            {{post.thread.board.name}}
+                        </a>
+                        <br /><br />
+                        Thread: 
+                        <a href="{% url 'bulletinboard:thread' post.thread.board.id post.thread.id %}" class="link">
+                            {{post.thread.name}}
+                        </a>
+                        <br />
+                        {{post.date_posted}}
+                    </td>
+                    <td>
+                        {{post.message|safe}}
+                        <section class="editpost">
+                            {% if profile.user.username == user.username and profile.is_banned == False and post.thread.is_locked == False %}
+                            <a class="link" href="{% url 'bulletinboard:edit_post' post.thread.board.id post.thread.id post.id %}">
+                                Edit Post
+                            </a>
+                        {% endif %}
+                        </section>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <section class="pagination">
+            <form method="post" action="">
+                {% csrf_token %}
+                Go to page: 
+                <select name="pagenumber">
+                {% load bulletinboard_filters %}
+                {% for page in posts.paginator.num_pages|get_range %}
+                    <option value="{{page}}">{{page}}</option>
+                {% endfor %}
+                <select>
+                <input type="submit" value=">>" name="gotopage" />
+            </form>
+        </section>
+    {% else %}
+        <h2>No Posts.</h2>
+    {% endif %}
+    </section>
+{% endblock %}

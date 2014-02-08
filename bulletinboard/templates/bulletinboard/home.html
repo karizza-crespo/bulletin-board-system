@@ -1,0 +1,87 @@
+{% extends "bulletinboard/base.html" %}
+{% block title %}Home{% endblock %}
+{% block body %}
+    {% if boards %}
+    {% for header, entries in boards.iteritems %}
+        <article>
+            <div class="list-of-boards">
+                <h2 class="next-line">
+                    {{header}}
+                    <hr />
+                </h2>
+                <br />
+                {% for board in entries %}
+                    <div class="board-display">
+                        {% if profile.user_type == 3 %}
+                            <a href="{% url 'bulletinboard:move_up' board.id %}" title="Move left">
+                                <img class="reorder-board-button" src="{{STATIC_URL}}images/left.png" />
+                            </a>
+                        {% endif %}
+                        <img class="board-icon" src="{{MEDIA_URL}}{{board.icon}}" />
+                        {% if profile.user_type == 3 %}
+                            <a href="{% url 'bulletinboard:move_down' board.id %}" title="Move right">
+                                <img class="reorder-board-button" src="{{STATIC_URL}}images/right.png" />
+                            </a>
+                        {% endif %}
+                        <div class="board-name-details">
+                            <a href="{% url 'bulletinboard:board' board.id %}" class="board-name">
+                                {{board.name}}
+                            </a>
+                            <div class="board-details">
+                                <p>{{board.description}}</p>
+                                <ul class="board-details-list">
+                                    <li><a class="thread-post-number">Threads:</a> {{board.get_thread_number}}</li>
+                                    <li><a class="thread-post-number">Posts:</a> {{board.get_post_number}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </article>
+    {% endfor %}
+    {% else %}
+        <article class="empty-board">
+            <h3 class="no-list">There are no boards yet.</h3>
+        </article>
+    {% endif %}
+    {% if perms.bulletinboard.add_topic %}
+        {% if profile.is_banned == False %}
+        <section class="topic-form">
+            <h1 class="new-form-header">
+                <hr />
+                Add Topic:
+                <hr />
+            </h1>
+            <form action="" method="post">
+                {% csrf_token %}
+                <p>
+                {{topic_form.as_p}}
+                <input type="submit" value="Add Topic" name="addtopic"/>
+                </p>
+            </form>
+        </section>
+        <section class="board-form">
+            <h1 class="new-form-header">
+                <hr />
+                Add Board:
+                <hr />
+            </h1>
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <p>
+                    {{board_form.as_p}}
+                    <input type="submit" value="Add Board" name="addboard" />
+                </p>
+            </form>
+        </section>
+        {% else %}
+        <section class="banned-user">
+            <h3 class="no-list">
+                <img src="{{STATIC_URL}}images/banned.png" class="header-image-button" />
+                You are banned from creating topics and boards.
+            </h3>
+        </section>
+        {% endif %}
+    {% endif %}
+{% endblock %}

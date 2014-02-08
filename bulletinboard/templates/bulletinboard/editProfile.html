@@ -1,0 +1,18 @@
+{% extends "bulletinboard/base.html" %}
+{% block title %} Edit User Profile {% endblock %}
+{% block body %}
+    <section>
+        <header class="user-profile-header">
+            <img src="{{MEDIA_URL}}{{profile.avatar}}" class="user-profile-avatar"/>
+            About
+        </header>
+    </section>
+    <section class="user-profile-form">
+        <form action="{% url 'bulletinboard:submit_user_profile' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <br />
+            <table>{{form.as_table}}</table>
+            <input type="submit" value="Edit Profile" />
+        </form>
+    </section>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "bulletinboard/base.html" %}
+{% block title %} Edit Post {% endblock %}
+{% block body %}
+    <header class="board-header">
+        <a href="/bulletinboard/" class="link"> Home </a>
+        >
+        <a href="{% url 'bulletinboard:board' post.thread.board.id %}" class="link">{{post.thread.board.name}}</a>
+        &nbsp;<img src="{{MEDIA_URL}}{{post.thread.board.icon}}" alt="Board Icon" class="header-board-icon" />&nbsp;
+        >
+        <a href="{% url 'bulletinboard:thread' post.thread.board.id post.thread.id %}" class="link">
+            {{post.thread.name}}
+        </a>
+    </header>
+    <br />
+    <section class="edit-post-form">
+    <form action="{% url 'bulletinboard:submit_post' post.thread.board.id post.thread.id post.id %}" method="POST">
+        {% csrf_token %}
+        <table>{{form.as_table}}</table>
+        <input type="submit" value="Edit Post" />
+    </form>
+    </section>
+    <br />
+{% endblock %}

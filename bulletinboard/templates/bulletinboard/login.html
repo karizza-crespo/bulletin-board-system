@@ -1,0 +1,54 @@
+{% extends "bulletinboard/base.html" %}
+{% block title %} Login {% endblock %}
+{% block header %}
+    <header>
+        <div class="project-name">
+            <h1>Bulletin Board System</h1>
+        </div>
+        <div class="login-form">
+            <form action="." method="post">
+                {% csrf_token %}
+                <input type="text" name="username" value="{{username}}" placeholder="username" />
+                <input type="password" name="password" placeholder="password"  />
+                <input type="submit" class="login-button" value="Login" />
+                <a class="register-link" href="/accounts/newUser/">Register</a>
+            </form>
+        </div>
+    </header>
+{% endblock %}
+{% block body %}
+    <!--
+        <br /><br />
+        <span class="fb">
+            Login with <a href="{% url 'socialauth_begin' 'facebook' %}">Facebook</a>
+        </span>
+    -->
+    {% for header, entries in boards.iteritems %}
+        <article>
+            <div class="list-of-boards">
+                <h2 class="next-line">
+                    {{header}}
+                    <hr />
+                </h2>
+                
+                {% for board in entries %}
+                    <div class="board-display">
+                        <img class="board-icon" src="{{MEDIA_URL}}{{board.icon}}" />
+                        <div class="board-name-details">
+                            <a href="{% url 'bulletinboard:board' board.id %}" class="board-name">
+                                {{board.name}}
+                            </a>
+                            <div class="board-details">
+                                <p>{{board.description}}</p>
+                                <ul class="board-details-list">
+                                    <li><a class="thread-post-number">Threads:</a> {{board.get_thread_number}}</li>
+                                    <li><a class="thread-post-number">Posts:</a> {{board.get_post_number}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </article>
+    {% endfor %}
+{% endblock %}

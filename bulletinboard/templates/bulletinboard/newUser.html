@@ -1,0 +1,41 @@
+{% extends "bulletinboard/base.html" %}
+{% block title %} Create New User {% endblock %}
+{% block header %}
+    <header>
+        <div class="project-name">
+            <h1>Bulletin Board System</h1>
+        </div>
+        <div class="login-link">
+            <a href="/accounts/login">Login</a>
+        </div>
+    </header>
+{% endblock %}
+{% block body %}
+    <section class="new-user">
+        <h1>Create new user</h1>
+        <form method="post" action=".">
+            {% csrf_token %}
+            {% if message %}
+                <h4 class="error-message">{{ message }}</h4>
+            {% endif %}
+            <table>
+                <tr>
+                    <td><label for="username">Username: </label></td>
+                    <td><input type="text" id="username" name="username" /></td>
+                </tr>
+                <tr>
+                    <td><label for="password">Password: </label></td>
+                    <td><input type="password" id="password" name="password" /></td>
+                </tr>
+                <tr>
+                    <td><label for="c_password">Confirm Password: </label></td>
+                    <td><input type="password" id="c_password" name="c_password" /></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="Register" /></td>
+                </tr>
+            </table>
+        </form>
+    </section>
+{% endblock %}
